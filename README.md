@@ -30,7 +30,7 @@
     28) Gloria Steinem: @gloriasteinem
     29) Aileen Lee: @aileenlee
     30) Dwayne Johnson: @TheRock
-    31) Brianna Wu: @Spacekatgal
+    31) Kanye West @kanyewest
     32) Serena William: @serenawilliams
     33. Katy Perry: @katyperry
     34. Justin Bieber: @justinbieber
