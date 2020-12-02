@@ -1,9 +1,11 @@
 import tweepy
 from random import shuffle
 from random import randrange
+import sys
+import os
 
 people = ['George Takei @GeorgeTakei', 'Jeff Weiner @jeffweiner', 'Alexia Tsotsis @alexia',
-          'Dan Primack @danprimack', 'Marissa Mayer@@marissamayer', 'Kim Dotcom @@KimDotcom',
+          'Dan Primack @danprimack', 'Marissa Mayer @marissamayer', 'Kim Dotcom @KimDotcom',
           'Arianna Huffington @ariannahuff', 'PewDiePie @pewdiepie', 'Vani Hari @thefoodbabe',
           'Beyoncé @Beyonce', 'Lorde @lorde', 'The White House @WhiteHouse',
           'Barack Obama @BarackObama', 'Pope Francis @Pontifex', 'J.K. Rowling @jk_rowling',
@@ -40,7 +42,20 @@ BEARER_TOKEN XXXXXXXXXXXXXXXXXXXXXXXXX
 ACCESS_TOKEN_KEY XXXXXXXXXXXXXXXXXXXXX
 ACCESS_TOKEN_SECRET XXXXXXXXXXXXXXXXXX
 '''
-with open("TwitterDeveloperKeys.txt") as f:
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
+with open(resource_path("TwitterDeveloperKeys.txt")) as f:
     lines = f.readlines()
     words = []
     for line in lines:
@@ -223,7 +238,7 @@ def choose_mode():
     print("Which mode would you like to play?")
     b = 1
     while b:
-        print("1) Play with Kanye West and Elon Musk\n2) Type in two valid Twitter names from the READme")
+        print("1) Play with Kanye West and Elon Musk\n2) Type in two valid Twitter names from the READme\n3) Quit")
         p = input()
         if p == '':
             print("No input was given. Enter something this time!")
@@ -233,6 +248,8 @@ def choose_mode():
             global VERBOSE
             VERBOSE = True
             return "verbose"
+        elif p.lower() == '3' or p.lower() == 'q' or p.lower() == 'quit':
+            exit(0)
         else:
             print("Invalid input. Please try again.")
 
@@ -260,7 +277,7 @@ if __name__ == '__main__':
         game_mode = choose_mode()
         if game_mode == 'verbose':
             list1, list2 = verbose_get_tweets()
-            print(len(list1),"Filtered tweets will be used for", USER1)
+            print(len(list1), "Filtered tweets will be used for", USER1)
             print(len(list2), "Filtered tweets will be used for", USER2)
         shuffle(list1)
         shuffle(list2)
