@@ -1,8 +1,6 @@
 import tweepy
 from random import shuffle
 from random import randrange
-import sys
-import os
 
 people = ['George Takei @GeorgeTakei', 'Jeff Weiner @jeffweiner', 'Alexia Tsotsis @alexia',
           'Dan Primack @danprimack', 'Marissa Mayer @marissamayer', 'Kim Dotcom @KimDotcom',
