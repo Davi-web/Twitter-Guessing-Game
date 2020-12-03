@@ -14,7 +14,7 @@ people = ['George Takei @GeorgeTakei', 'Jeff Weiner @jeffweiner', 'Alexia Tsotsi
           'Anne-Marie Slaughter @SlaughterAM', 'Jeff Weiner @jeffweiner', 'Elizabeth Warren @SenWarren',
           'Debora Spar @deboraspar', 'Padmasree Warrior @padmasree', 'Anna Maria Chávez @AnnaMariaChavez',
           'Gloria Steinem @gloriasteinem', 'Aileen Lee @aileenlee', 'Dwayne Johnson @TheRock',
-          'Brianna Wu @Spacekatgal', 'Serena William @serenawilliams', 'Katy Perry @katyperry',
+          'Kanye West @kanywest', 'Serena William @serenawilliams', 'Katy Perry @katyperry',
           'Justin Bieber @justinbieber', 'Taylor Swift @taylorswift13', 'Youtube @YouTube',
           'Rihanna @rihanna', 'Ellen DeGeneres @TheEllenShow', 'Lady Gaga @ladygaga',
           'Justin Timberlake @jtimberlake', 'Britney Spears @britneyspears',
@@ -44,18 +44,9 @@ ACCESS_TOKEN_SECRET XXXXXXXXXXXXXXXXXX
 '''
 
 
-def resource_path(relative_path):
-    """ Get absolute path to resource, works for dev and for PyInstaller """
-    try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
 
 
-with open(resource_path("TwitterDeveloperKeys.txt")) as f:
+with open("TwitterDeveloperKeys.txt") as f:
     lines = f.readlines()
     words = []
     for line in lines:
@@ -141,7 +132,7 @@ def verbose_get_tweets():
 
 
 def check_username(user):
-    print("Did you mean ", user, "?", sep="")
+    print("Did you mean ", user[:len(user)-1], "?", sep="")
     b = 1
     while b:
         print("1) yes\n2) no")
@@ -231,7 +222,9 @@ def play_twitter_game(tweet1, tweet2):
             lives -= 1
             total += 1
             print("Incorrect! You have", lives, "lives remaining. Yikes!\n")
-    print("\nGame Over! You have scored: ", score, "/", total, sep="")
+    print("\nGame Over! You have scored: ", score, "/", total, " with an accuracy of ", end="", sep="")
+    percent = score / total * 100
+    print("%.2f" % percent, "%", sep="")
 
 
 def choose_mode():
