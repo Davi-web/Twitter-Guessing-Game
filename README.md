@@ -1,6 +1,28 @@
 # Twitter-Guessing-Gamee
+Adapted from https://github.com/ChangePlusPlusVandy/change-coding-challenge-Davi-web
 
-    Inspirational People:
+Given a tweet by Kanye West or Elon Musk, prompt the user to guess which public figure made the tweet, let the user know if they were correct. Once the user is finished let the user know how accurate they were in their guesses.
+
+Enter your twitter developer keys in TwitterDeveloperKeys.txt in order to run 'main.py. 
+
+There is also an executable file called 'main' that you can run without if you do not have access to twitter api keys.
+
+This is the game logic of the game:
+    
+    1) When user starts program, load the first 3200 tweets by Elon and Kanye, filtered to not include any links or tags to other twitter users
+    2) Randomly choose a tweet by Elon or Kanye to give to the user
+    3) Prompt the user to guess
+    4) Let the user know if they were correct
+    5) Repeat steps 1-4
+    6) Show the user their game statistics
+
+There are two game modes you can play:
+
+    1) Kanye West vs Elon Musk
+    2) Any two twitter users from the list of people below
+        
+List of people users can play the game with:
+
     1) George Takei: @GeorgeTakei
     2) Jeff Weiner: @jeffweiner
     3) Alexia Tsotsis: @alexia
