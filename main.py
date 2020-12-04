@@ -22,7 +22,8 @@ people = ['George Takei @GeorgeTakei', 'Jeff Weiner @jeffweiner', 'Alexia Tsotsi
           'Jennifer Lopez @JLo', 'Drizzy @Drake', 'Oprah Winfrey @Oprah',
           'LeBron James @KingJames', 'Miley Ray Cyrus @MileyCyrus', 'Kevin Hart @KevinHart4real',
           'Bill Gates @BillGates', 'One Direction @onedirection', 'ESPN @espn',
-          'SportsCenter @SportsCenter', 'Kim Kardashian West @KimKardashian', 'Kanye West @kanyewest'
+          'SportsCenter @SportsCenter', 'Kim Kardashian West @KimKardashian',
+          'Elon Musk @elonmusk'
           ]
 USER1 = "Kanye West"
 USER2 = "Elon Musk"
@@ -41,9 +42,6 @@ ACCESS_TOKEN_KEY XXXXXXXXXXXXXXXXXXXXX
 ACCESS_TOKEN_SECRET XXXXXXXXXXXXXXXXXX
 '''
 
-
-
-
 with open("TwitterDeveloperKeys.txt") as f:
     lines = f.readlines()
     words = []
@@ -57,7 +55,7 @@ access_token = words[7]
 access_token_secret = words[9]
 
 
-def game_input():
+def game_input() -> str:
     b = 1
     while b:
         # ask user
@@ -71,14 +69,13 @@ def game_input():
         elif row.lower() == 'quit' or row.lower() == "q" or int(row) == 4:
             exit(0)
         # input for the choosing who the tweet is from
-        elif row.isnumeric() and 1 <= int(row) <= 3:
-            b -= 1
+        elif row == '1' or row == '2' or row == '3':
+            return row
         else:
             print("\nInvalid Input. Please try again.")
-    return row
 
 
-def verbose_get_tweets():
+def verbose_get_tweets() -> list:
     print("First Person")
     b = 1
     user1, username1 = "", ""
@@ -90,13 +87,14 @@ def verbose_get_tweets():
         boolean = False
         for name in people:
             if temp in name.lower():
-                user1, username1 = name.split('@', 1)
+                user1, username1 = name.split('@')
                 boolean = check_username(user1)
                 if boolean:
                     break
         if not boolean:
             print("Invalid input. Please try again.")
         else:
+            print(user1, username1)
             b -= 1
     global USER1
     USER1 = user1
@@ -129,8 +127,8 @@ def verbose_get_tweets():
     return temp1, temp2
 
 
-def check_username(user):
-    print("Did you mean ", user[:len(user)-1], "?", sep="")
+def check_username(user: str) -> bool:
+    print("Did you mean ", user[:len(user) - 1], "?", sep="")
     b = 1
     while b:
         print("1) yes\n2) no")
@@ -146,7 +144,7 @@ def check_username(user):
             print("Invalid input. 1 or 2")
 
 
-def get_tweets(username):
+def get_tweets(username: str) -> list:
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     # Access to user's access key and access secret
     auth.set_access_token(access_token, access_token_secret)
@@ -191,7 +189,7 @@ def get_tweets(username):
     return tmp
 
 
-def play_twitter_game(tweet1, tweet2):
+def play_twitter_game(tweet1: list, tweet2: list) -> None:
     lives = 5
     score = 0
     total = 0
@@ -225,7 +223,7 @@ def play_twitter_game(tweet1, tweet2):
     print("%.2f" % percent, "%", sep="")
 
 
-def choose_mode():
+def choose_mode() -> str:
     print("Which mode would you like to play?")
     b = 1
     while b:
@@ -245,7 +243,7 @@ def choose_mode():
             print("Invalid input. Please try again.")
 
 
-def play_again():
+def play_again() -> bool:
     b = 1
     while b:
         print("Would you like to play again?\n1) Yes\n2) No")
@@ -261,16 +259,21 @@ def play_again():
 
 if __name__ == '__main__':
     playing = True
-    list1 = get_tweets("kanyewest")
-    list2 = get_tweets("elonmusk")
+    # first load the game for kanye west and elon musk
+    list_1 = get_tweets("kanyewest")
+    list_2 = get_tweets("elonmusk")
     print("Welcome to the Twitter Guessing Game!")
     while playing:
+        # asks user which game mode they want to play
         game_mode = choose_mode()
+        # this will retrieve the tweets from the people the user inputted from the api
         if game_mode == 'verbose':
-            list1, list2 = verbose_get_tweets()
-            print(len(list1), "Filtered tweets will be used for", USER1)
-            print(len(list2), "Filtered tweets will be used for", USER2)
-        shuffle(list1)
-        shuffle(list2)
-        play_twitter_game(list1, list2)
+            list_11, list_12 = verbose_get_tweets()
+            print(len(list_1), "Filtered tweets will be used for", USER1)
+            print(len(list_2), "Filtered tweets will be used for", USER2)
+        # shuffle the tweets around for randomness
+        shuffle(list_1)
+        shuffle(list_2)
+        play_twitter_game(list_1, list_2)
+        # keeps playing if the user wants to keep playing
         playing = play_again()
