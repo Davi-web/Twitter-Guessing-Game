@@ -1,11 +1,8 @@
 # Twitter-Guessing-Gamee
-Adapted from https://github.com/ChangePlusPlusVandy/change-coding-challenge-Davi-web
-
 Given a tweet by Kanye West or Elon Musk, prompt the user to guess which public figure made the tweet, let the user know if they were correct. Once the user is finished let the user know how accurate they were in their guesses.
 
-Enter your twitter developer keys in TwitterDeveloperKeys.txt in order to run 'main.py. 
 
-There is also an executable file called 'main' that you can run without if you do not have access to twitter api keys.
+Enter your twitter developer keys in TwitterDeveloperKeys.txt in order to run 'main.py. There is also an executable file called 'main' that you can run without if you do not have access to twitter api keys.
 
 This is the game logic of the game:
     
@@ -83,3 +80,5 @@ List of people users can play the game with:
     59. One Direction: @onedirection
     60. ESPN: @espn
     61. SportsCenter: @SportsCenter
+    
+Adapted from https://github.com/ChangePlusPlusVandy/change-coding-challenge-Davi-web
