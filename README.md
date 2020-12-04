@@ -82,4 +82,6 @@ List of people users can play the game with:
     60. ESPN: @espn
     61. SportsCenter: @SportsCenter
     
+Tweets were scraped using the Tweepy package
+
 Adapted from https://github.com/ChangePlusPlusVandy/change-coding-challenge-Davi-web
