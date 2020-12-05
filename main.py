@@ -1,6 +1,28 @@
-import tweepy
+from os import environ
 from random import shuffle
 from random import randrange
+import tweepy
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+from pygame import mixer  # Load the popular external library
+
+mixer.init()
+# Add the full path of the mp3 file
+playlist = ['/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/Lovebug.mp3',
+            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/34+35.mp3',
+            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/Shape_of_you.mp3',
+            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/sugar.mp3',
+            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/rude.mp3',
+            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/count_on_me.mp3',
+            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/sunflower.mp3'
+            ]
+shuffle(playlist)
+shuffle(playlist)
+mixer.music.load(playlist.pop())
+mixer.music.set_volume(.8)
+mixer.music.play()
+mixer.music.queue(playlist.pop())
+
+print("Welcome to the Twitter Guessing Game! Please wait while we load tweets for Kanye West and Elon Musk")
 
 people = ['George Takei @GeorgeTakei', 'Jeff Weiner @jeffweiner', 'Alexia Tsotsis @alexia',
           'Dan Primack @danprimack', 'Marissa Mayer @marissamayer', 'Kim Dotcom @KimDotcom',
@@ -12,7 +34,7 @@ people = ['George Takei @GeorgeTakei', 'Jeff Weiner @jeffweiner', 'Alexia Tsotsi
           'Anne-Marie Slaughter @SlaughterAM', 'Jeff Weiner @jeffweiner', 'Elizabeth Warren @SenWarren',
           'Debora Spar @deboraspar', 'Padmasree Warrior @padmasree', 'Anna Maria Chávez @AnnaMariaChavez',
           'Gloria Steinem @gloriasteinem', 'Aileen Lee @aileenlee', 'Dwayne Johnson @TheRock',
-          'Kanye West @kanywest', 'Serena William @serenawilliams', 'Katy Perry @katyperry',
+          'Kanye West @kanyewest', 'Serena William @serenawilliams', 'Katy Perry @katyperry',
           'Justin Bieber @justinbieber', 'Taylor Swift @taylorswift13', 'Youtube @YouTube',
           'Rihanna @rihanna', 'Ellen DeGeneres @TheEllenShow', 'Lady Gaga @ladygaga',
           'Justin Timberlake @jtimberlake', 'Britney Spears @britneyspears',
@@ -75,7 +97,7 @@ def game_input() -> str:
             print("\nInvalid Input. Please try again.")
 
 
-def verbose_get_tweets() -> list:
+def verbose_get_tweets() -> tuple:
     print("First Person")
     b = 1
     user1, username1 = "", ""
@@ -94,7 +116,6 @@ def verbose_get_tweets() -> list:
         if not boolean:
             print("Invalid input. Please try again.")
         else:
-            print(user1, username1)
             b -= 1
     global USER1
     USER1 = user1
@@ -193,7 +214,7 @@ def play_twitter_game(tweet1: list, tweet2: list) -> None:
     lives = 5
     score = 0
     total = 0
-    print("Guess who wrote the quote above!")
+    print("Guess who wrote the quote below!")
     while lives:
 
         num = randrange(1, 3)
@@ -262,9 +283,10 @@ if __name__ == '__main__':
     # first load the game for kanye west and elon musk
     list_1 = get_tweets("kanyewest")
     list_2 = get_tweets("elonmusk")
-    print("Welcome to the Twitter Guessing Game!")
     while playing:
         # asks user which game mode they want to play
+        if len(playlist) > 0:
+            mixer.music.queue(playlist.pop())
         game_mode = choose_mode()
         # this will retrieve the tweets from the people the user inputted from the api
         if game_mode == 'verbose':
