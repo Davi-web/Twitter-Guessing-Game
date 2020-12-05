@@ -7,13 +7,13 @@ from pygame import mixer  # Load the popular external library
 
 mixer.init()
 # Add the full path of the mp3 file
-playlist = ['/Users/davidha/PycharmProjects/Twitter-Guessing-Game/Lovebug.mp3',
-            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/34+35.mp3',
-            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/Shape_of_you.mp3',
-            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/sugar.mp3',
-            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/rude.mp3',
-            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/count_on_me.mp3',
-            '/Users/davidha/PycharmProjects/Twitter-Guessing-Game/music/sunflower.mp3'
+playlist = ['./Lovebug.mp3',
+            './34+35.mp3',
+            './Shape_of_you.mp3',
+            './sugar.mp3',
+            './rude.mp3',
+            './count_on_me.mp3',
+            './sunflower.mp3'
             ]
 shuffle(playlist)
 shuffle(playlist)
